@@ -21,7 +21,10 @@ public class Number {
 		if (dotIndex == -1) {
 			return;
 		}
-		
+
+        /**
+         * Instead of simply cutting of the string....
+         */
 		String value10Decimal = String.format("%.10f", Double.parseDouble(value));
 
 		int zeroAfterDotIndex = dotIndex;
@@ -65,5 +68,15 @@ public class Number {
 	@Override
 	public String toString() {
 		return displayValue;
+	}
+
+	public static boolean isValidNumber(String command){
+		try {
+			Double.parseDouble(command);
+			return true;
+		}catch(NumberFormatException e){
+			//log
+			return false;
+		}
 	}
 }
