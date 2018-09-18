@@ -1,19 +1,16 @@
 package me.vincent.rpncalculator.operators.unary;
+
 import me.vincent.rpncalculator.numbers.Number;
 
 public class SqrtOperator extends AbstractUnaryOperator {
-	
-	public SqrtOperator() {
-		
-	}
 
-	public SqrtOperator(Number[] parameters) {
-		super(parameters);
-	}
+    public SqrtOperator(String operatorString) {
+        super(operatorString);
+    }
 
-	@Override
-	public Number doCalculate() {
-		return new Number(String.valueOf(Math.sqrt(parameters[0].doubleValue())));
-	}
+    @Override
+    public Number[] doExecute() {
+        return new Number[]{new Number(String.valueOf(Math.sqrt(parameters[0].doubleValue())))};
+    }
 
 }

@@ -1,6 +1,9 @@
-import junit.framework.TestCase;
-import me.vincent.rpncalculator.RPNCalculator;
-import org.junit.*;
+import me.vincent.rpncalculator.CalculationService;
+import me.vincent.rpncalculator.RPNCalculationServiceImpl;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Created by Vincent.Huang on 2018/9/17.
@@ -8,7 +11,7 @@ import org.junit.*;
  */
 public class StandAloneOperationTestCase {
 
-    private RPNCalculator calculator;
+    private CalculationService calculationService;
 
 
     public StandAloneOperationTestCase(){
@@ -16,14 +19,13 @@ public class StandAloneOperationTestCase {
 
     @Before
     public void setUpBefore(){
-        calculator = new RPNCalculator();
-        calculator.init();
+        calculationService = new RPNCalculationServiceImpl();
     }
 
     @After
     public void clearAfter(){
-        calculator.processConsoleCommand("clear");
-        calculator = null;
+        calculationService.execute("clear");
+        calculationService = null;
     }
 
     @Test
@@ -31,8 +33,8 @@ public class StandAloneOperationTestCase {
         String command = "5 2";
         String expected = "5 2";
 
-        calculator.processConsoleCommand(command);
-        String result = calculator.printStack();
+        calculationService.execute(command);
+        String result = calculationService.getStackAsString();
 
         Assert.assertTrue(result.equalsIgnoreCase(expected));
     }
@@ -42,8 +44,8 @@ public class StandAloneOperationTestCase {
         String command = "2 sqrt 1 2 3 clear 1 2";
         String expected = "1 2";
 
-        calculator.processConsoleCommand(command);
-        String result = calculator.printStack();
+        calculationService.execute(command);
+        String result = calculationService.getStackAsString();
 
         Assert.assertTrue(result.equalsIgnoreCase(expected));
     }
@@ -53,8 +55,8 @@ public class StandAloneOperationTestCase {
         String command = "2 sqrt";
         String expected = "1.4142135624";
 
-        calculator.processConsoleCommand(command);
-        String result = calculator.printStack();
+        calculationService.execute(command);
+        String result = calculationService.getStackAsString();
 
         Assert.assertTrue(result.equalsIgnoreCase(expected));
     }
@@ -64,8 +66,8 @@ public class StandAloneOperationTestCase {
         String command = "1 2 3 + - 2 undo undo clear undo";
         String expected = "1 5";
 
-        calculator.processConsoleCommand(command);
-        String result = calculator.printStack();
+        calculationService.execute(command);
+        String result = calculationService.getStackAsString();
 
         Assert.assertTrue(result.equalsIgnoreCase(expected));
     }
@@ -75,8 +77,8 @@ public class StandAloneOperationTestCase {
         String command = "1 2 3 + +";
         String expected = "6";
 
-        calculator.processConsoleCommand(command);
-        String result = calculator.printStack();
+        calculationService.execute(command);
+        String result = calculationService.getStackAsString();
 
         Assert.assertTrue(result.equalsIgnoreCase(expected));
     }
@@ -86,8 +88,8 @@ public class StandAloneOperationTestCase {
         String command = "1 2 3 - -";
         String expected = "2";
 
-        calculator.processConsoleCommand(command);
-        String result = calculator.printStack();
+        calculationService.execute(command);
+        String result = calculationService.getStackAsString();
 
         Assert.assertTrue(result.equalsIgnoreCase(expected));
     }
@@ -97,8 +99,8 @@ public class StandAloneOperationTestCase {
         String command = "1 2.5 3 * *";
         String expected = "7.5";
 
-        calculator.processConsoleCommand(command);
-        String result = calculator.printStack();
+        calculationService.execute(command);
+        String result = calculationService.getStackAsString();
 
         Assert.assertTrue(result.equalsIgnoreCase(expected));
     }
@@ -108,8 +110,8 @@ public class StandAloneOperationTestCase {
         String command = "1 8 / 4 * 8 /";
         String expected = "0.0625";
 
-        calculator.processConsoleCommand(command);
-        String result = calculator.printStack();
+        calculationService.execute(command);
+        String result = calculationService.getStackAsString();
 
         Assert.assertTrue(result.equalsIgnoreCase(expected));
     }
