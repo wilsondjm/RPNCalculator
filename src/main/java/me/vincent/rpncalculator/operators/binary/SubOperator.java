@@ -3,18 +3,14 @@ package me.vincent.rpncalculator.operators.binary;
 import me.vincent.rpncalculator.numbers.Number;
 
 public class SubOperator extends AbstractBinaryOperator {
-	
-	public SubOperator() {
-		
-	}
 
-	public SubOperator(Number[] parameters) {
-		super(parameters);
-	}
+    public SubOperator(String operatorString) {
+        super(operatorString);
+    }
 
-	@Override
-	public Number doCalculate() {
-		return parameters[0].substract(parameters[1]);
-	}
+    @Override
+    public Number[] doExecute() {
+        return new Number[]{new Number(String.valueOf(parameters[0].doubleValue() - parameters[1].doubleValue()))};
+    }
 
 }
