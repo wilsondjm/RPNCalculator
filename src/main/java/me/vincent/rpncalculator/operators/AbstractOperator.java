@@ -44,7 +44,6 @@ public abstract class AbstractOperator implements Operator, NumbersAware {
                 parameters[requiredNumofParameters - popIndex - 1] = numberStack.pop();
             }
         } catch (EmptyStackException e) {
-
             /**push the poped numbers back to stack when error*/
             popIndex -= 1;
             for (; popIndex >= 0; popIndex--) {
